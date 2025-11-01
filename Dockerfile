@@ -1,21 +1,26 @@
-# Gunakan image Node.js untuk build tahap pertama
+# Tahap 1: Build Angular
 FROM node:22 AS build
 
 WORKDIR /app
 
-# Salin package dan install dependency
+# Salin package.json dan package-lock.json lalu install dependencies
 COPY package*.json ./
 RUN npm install
 
-# Salin semua file dan build aplikasi Angular
+# Salin semua file project
 COPY . .
+
+# Build Angular untuk production
 RUN npm run build --prod
 
-# Tahap kedua: gunakan Nginx untuk serve hasil build
+# Tahap 2: Serve menggunakan Nginx
 FROM nginx:alpine
-COPY --from=build /app/dist /usr/share/nginx/html
+
+# Salin hasil build dari tahap 1 ke folder Nginx
+COPY --from=build /app/dist/Front-End /usr/share/nginx/html
 
 # Expose port 80
 EXPOSE 80
 
+# Jalankan Nginx
 CMD ["nginx", "-g", "daemon off;"]
