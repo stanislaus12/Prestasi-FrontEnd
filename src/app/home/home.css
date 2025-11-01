@@ -1,0 +1,301 @@
+.services .service-item {
+  background: var(--surface-color);
+  border: 2px solid color-mix(in srgb, var(--default-color), transparent 90%);
+  border-radius: 16px;
+  padding: 35px 25px;
+  text-align: center;
+  height: 100%;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.services .service-item::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(
+    90deg,
+    var(--accent-color),
+    color-mix(in srgb, var(--accent-color), transparent 50%)
+  );
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.services .service-item:hover {
+  border-color: var(--accent-color);
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+}
+
+.services .service-item:hover::before {
+  transform: scaleX(1);
+}
+
+.services .service-item:hover .icon-wrapper {
+  background: var(--accent-color);
+  color: var(--contrast-color);
+  transform: rotate(5deg) scale(1.05);
+}
+
+.services .service-item:hover .read-more {
+  color: var(--accent-color);
+}
+
+.services .service-item:hover .read-more i {
+  transform: translateX(5px);
+}
+
+.services .service-item.featured {
+  border-color: var(--accent-color);
+  box-shadow: 0 10px 30px rgba(54, 144, 231, 0.15);
+}
+
+.services .service-item.featured::before {
+  transform: scaleX(1);
+}
+
+.services .featured-tag {
+  position: absolute;
+  top: 15px;
+  right: -30px;
+  background: var(--accent-color);
+  color: var(--contrast-color);
+  padding: 5px 35px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transform: rotate(45deg);
+  box-shadow: 0 3px 10px rgba(54, 144, 231, 0.3);
+}
+
+.services .icon-wrapper {
+  width: 70px;
+  height: 70px;
+  margin: 0 auto 20px;
+  background: color-mix(in srgb, var(--accent-color), transparent 90%);
+  color: var(--accent-color);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.services .icon-wrapper i {
+  font-size: 32px;
+}
+
+.services h4 {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: var(--heading-color);
+}
+
+.services p {
+  font-size: 14px;
+  line-height: 1.6;
+  color: color-mix(in srgb, var(--default-color), transparent 25%);
+  margin-bottom: 20px;
+}
+
+.services .read-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--heading-color);
+  font-weight: 600;
+  font-size: 14px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.services .read-more i {
+  font-size: 14px;
+  transition: transform 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  .services .service-item {
+    padding: 30px 20px;
+    margin-bottom: 20px;
+  }
+
+  .services .icon-wrapper {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 18px;
+  }
+
+  .services .icon-wrapper i {
+    font-size: 28px;
+  }
+
+  .services h4 {
+    font-size: 18px;
+  }
+
+  .services p {
+    font-size: 13px;
+  }
+}
+
+.actions button.mat-icon-button {
+  background-color: transparent;
+  border-radius: 50%;
+  padding: 8px;
+  transition: all 0.3s ease;
+}
+
+.actions button[color="primary"] {
+  background: linear-gradient(135deg, #ffcc33, #ff8800);
+  margin-right: 10px;
+  color: #fff;
+}
+
+.actions button[color="warn"] {
+  background: linear-gradient(135deg, #ff4b2b, #ff0000);
+  color: #fff;
+}
+
+.actions button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.btn-accent {
+  display: inline-block;
+  padding: 12px 28px;
+  background-color: var(--accent-color);
+  color: var(--contrast-color);
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 14px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.btn-accent:hover {
+  background-color: color-mix(in srgb, var(--accent-color), black 10%);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px
+    color-mix(in srgb, var(--accent-color), transparent 60%);
+}
+
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1050;
+}
+
+.modal-content {
+  background: var(--surface-color, #fff);
+  padding: 25px 30px;
+  border-radius: 12px;
+  width: 400px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.modal-content h3 {
+  margin-bottom: 20px;
+  text-align: center;
+  color: var(--heading-color, #333);
+}
+
+.form-group {
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 600;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.btn.btn-secondary {
+  background: #ccc;
+  color: #000;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+.btn.btn-secondary:hover {
+  background: #bbb;
+}
+
+.search-bar {
+  max-width: 400px;
+  width: 100%;
+}
+
+.search-input {
+  border-radius: 6px;
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.search-input:focus {
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 2px rgba(0, 150, 255, 0.1);
+}
+
+.search-bar i {
+  color: var(--accent-color);
+  font-size: 18px;
+}
+
+.search-icon-btn {
+  background-color: var(--accent-color); /* warna lembut */
+  border: none;
+  font-size: 20px;
+  padding: 6px;
+  border-radius: 6px; /* sedikit melengkung */
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.search-icon-btn:hover {
+  background-color: rgba(0, 123, 255, 0.2); /* sedikit lebih gelap saat hover */
+  color: color-mix(in srgb, var(--accent-color), black 20%);
+}
+
+.search-icon-btn i {
+  border: none;
+  color: white;
+  font-size: 18px;
+  padding: 6px;
+  border-radius: 3px; /* sedikit melengkung */
+  transition: background-color 0.3s ease, color 0.3s ease;
+}

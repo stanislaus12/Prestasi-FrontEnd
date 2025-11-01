@@ -1,0 +1,179 @@
+<section id="services" class="services section">
+  <div class="container section-title" data-aos="fade-up">
+    <span class="subtitle">Prestasi</span>
+    <h2>Prestasi</h2>
+  </div>
+
+  <div class="container" data-aos="fade-up" data-aos-delay="100">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <div class="search-bar d-flex align-items-center">
+        <button class="btn search-icon-btn me-2" (click)="searchData()">
+          <i class="bi bi-search"></i>
+        </button>
+
+        <input
+          type="text"
+          [(ngModel)]="searchKeyword"
+          (keyup.enter)="searchData()"
+          placeholder="Cari prestasi..."
+          class="form-control search-input"
+        />
+
+        <button class="btn btn-secondary ms-2" (click)="clearSearch()">
+          Reset
+        </button>
+      </div>
+
+      <button class="btn btn-accent" (click)="openAddModal()">
+        <i class="bi bi-plus-lg me-2"></i>
+        Tambah Prestasi
+      </button>
+    </div>
+
+    <div class="row gy-4">
+      <div
+        class="col-lg-3 col-md-6"
+        *ngFor="let item of dataSource.data"
+        data-aos="zoom-in"
+      >
+        <div class="service-item featured">
+          <div class="featured-tag">{{ item.tahun_prestasi }}</div>
+          <div class="icon-wrapper">
+            <i class="bi bi-trophy"></i>
+          </div>
+          <h4>{{ item.nama_prestasi }}</h4>
+          <p>{{ item.cabang_prestasi }} | {{ item.penyelenggara_prestasi }}</p>
+          <div class="actions">
+            <button
+              mat-icon-button
+              color="primary"
+              (click)="openEditModal(item)"
+              title="Edit Prestasi"
+            >
+              <mat-icon>edit</mat-icon>
+            </button>
+
+            <button
+              mat-icon-button
+              color="warn"
+              (click)="openDeleteModal(item)"
+              title="Hapus Prestasi"
+            >
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="modal-backdrop" *ngIf="showEditModal">
+  <div class="modal-content">
+    <h3>Edit Prestasi</h3>
+
+    <form (ngSubmit)="editData()">
+      <div class="form-group">
+        <label>Nama Prestasi</label>
+        <input
+          type="text"
+          [(ngModel)]="selected.nama_prestasi"
+          name="nama_prestasi"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label>Cabang Prestasi</label>
+        <input
+          type="text"
+          [(ngModel)]="selected.cabang_prestasi"
+          name="cabang_prestasi"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label>Tahun Prestasi</label>
+        <input
+          type="text"
+          [(ngModel)]="selected.tahun_prestasi"
+          name="tahun_prestasi"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label>Penyelenggara</label>
+        <input
+          type="text"
+          [(ngModel)]="selected.penyelenggara_prestasi"
+          name="penyelenggara_prestasi"
+          required
+        />
+      </div>
+
+      <div class="modal-actions">
+        <button type="submit" class="btn btn-accent">Simpan</button>
+        <button
+          type="button"
+          class="btn btn-secondary"
+          (click)="closeEditModal()"
+        >
+          Batal
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="modal-backdrop" *ngIf="showAddModal">
+  <div class="modal-content">
+    <h3>Tambah Prestasi</h3>
+
+    <form
+      (ngSubmit)="addData(
+        nama_prestasi.value,
+        cabang_prestasi.value,
+        tahun_prestasi.value,
+        penyelenggara_prestasi.value
+      )"
+    >
+      <div class="form-group">
+        <label>Nama Prestasi</label>
+        <input type="text" #nama_prestasi name="nama_prestasi" required />
+      </div>
+
+      <div class="form-group">
+        <label>Cabang Prestasi</label>
+        <input type="text" #cabang_prestasi name="cabang_prestasi" required />
+      </div>
+
+      <div class="form-group">
+        <label>Tahun Prestasi</label>
+        <input type="text" #tahun_prestasi name="tahun_prestasi" required />
+      </div>
+
+      <div class="form-group">
+        <label>Penyelenggara</label>
+        <input
+          type="text"
+          #penyelenggara_prestasi
+          name="penyelenggara_prestasi"
+          required
+        />
+      </div>
+
+      <div class="modal-actions">
+        <button type="submit" class="btn btn-accent">Tambah</button>
+        <button
+          type="button"
+          class="btn btn-secondary"
+          (click)="closeAddModal()"
+        >
+          Batal
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
