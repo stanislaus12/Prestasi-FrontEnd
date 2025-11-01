@@ -14,7 +14,7 @@ RUN npm install
 COPY . .
 
 # Build Angular untuk production
-RUN npm run build --prod
+RUN npm run build
 
 # ==============================
 # Tahap 2: Serve dengan Nginx
