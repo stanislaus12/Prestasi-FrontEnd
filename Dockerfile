@@ -14,6 +14,7 @@ RUN npm install
 COPY . .
 
 # Build Angular untuk production
+# Pastikan nama project sesuai dengan angular.json
 RUN npm run build
 
 # ==============================
@@ -26,6 +27,12 @@ RUN rm -rf /usr/share/nginx/html/*
 
 # Salin hasil build Angular dari tahap 1 ke folder Nginx
 COPY --from=build /app/dist/Front-End /usr/share/nginx/html
+
+# Beri permission agar Nginx bisa membaca file
+RUN chmod -R 755 /usr/share/nginx/html
+
+# Salin konfigurasi Nginx khusus Angular SPA
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 # Expose port 80
 EXPOSE 80
