@@ -1,12 +1,11 @@
 # ==============================
-# Tahap 1: Build Angular
+# Stage 1: Build Angular
 # ==============================
 FROM node:22 AS build
 
-# Tentukan working directory
 WORKDIR /app
 
-# Salin package.json dan package-lock.json, lalu install dependencies
+# Salin package.json & package-lock.json, lalu install dependencies
 COPY package*.json ./
 RUN npm install
 
@@ -14,21 +13,18 @@ RUN npm install
 COPY . .
 
 # Build Angular untuk production
-# Pastikan nama project sesuai dengan angular.json
 RUN npm run build
 
 # ==============================
-# Tahap 2: Serve dengan Nginx
+# Stage 2: Serve dengan Nginx
 # ==============================
 FROM nginx:alpine
 
 # Hapus default Nginx content
 RUN rm -rf /usr/share/nginx/html/*
 
-# Salin hasil build Angular dari tahap 1 ke folder Nginx
+# Copy isi folder browser ke root Nginx
 COPY --from=build /app/dist/browser/ /usr/share/nginx/html/
-
-# Beri permission agar Nginx bisa membaca file
 RUN chmod -R 755 /usr/share/nginx/html
 
 # Salin konfigurasi Nginx khusus Angular SPA
